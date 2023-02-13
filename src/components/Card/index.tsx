@@ -1,22 +1,12 @@
 import { Link } from "react-router-dom"
-
-interface ICnab {
-    id: number
-    type: string
-    date: string
-    value: number
-    cpf: string
-    card: string
-    store: string
-    nature: "exit" | "entrance"
-    hour: string
-}
+import { ICnab } from "../../contexts/cnabContext"
 
 interface ICardProps {
     cnab: ICnab
 }
 
 const Card = ({cnab}: ICardProps) => {
+
     return (
         <tr>
             <td>{cnab.id}</td>
@@ -25,7 +15,7 @@ const Card = ({cnab}: ICardProps) => {
             <td>{Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'}).format(cnab.value)}</td>
             <td>{cnab.cpf}</td>
             <td>{cnab.card}</td>
-            <td><Link to={`store/${cnab.id}`}>{cnab.store}</Link></td>
+            <td><Link to={`store/${cnab.store.id}`}>{cnab.store.name}</Link></td>
             <td>{cnab.nature}</td>
             <td>{cnab.hour}</td>
         </tr>

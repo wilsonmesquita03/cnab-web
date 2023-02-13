@@ -26,3 +26,13 @@ export const getStoreById = async (id: number | string) => {
 
     return data
 }
+
+export const createCnab = async (file: File) => {
+    const { data, status } = await api.post<ICnab[]>("api/cnab/", {data: file}, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    })
+
+    if (status === 201) return data
+}

@@ -24,7 +24,7 @@ const List = ({list}: IListProps) => {
                 </tr>
             </thead>
             <tbody>
-                {list?.map(elem => <Card cnab={elem} key={elem.id}/>)}
+                {list?.map((elem, index) => <Card cnab={elem} key={index}/>)}
             </tbody>
         </TableContainer>
     )

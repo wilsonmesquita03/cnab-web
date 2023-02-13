@@ -1,11 +1,12 @@
-import { createContext } from "react";
+import { createContext, Dispatch, SetStateAction } from "react";
 import { ReactNode, useEffect, useState } from "react"
-import { getAllCnabs } from "../services";
+import { getAllCnabs, IStore } from "../services";
 
 export const cnabContext = createContext({} as ICnabContextProps)
 
 interface ICnabContextProps {
-    cnabList: ICnab[] | null
+    cnabList: ICnab[]
+    setCnabList: any
 }
 
 export interface ICnab {
@@ -15,9 +16,9 @@ export interface ICnab {
     value: number
     cpf: string
     card: string
-    store: string
     nature: "exit" | "entrance"
     hour: string
+    store: IStore
 }
 
 interface ICnabProviderProps {
@@ -25,7 +26,7 @@ interface ICnabProviderProps {
 }
 
 const CnabProvider = ({children}: ICnabProviderProps) => {
-    const [cnabList, setCnabList] = useState<ICnab[] | null>(null)
+    const [cnabList, setCnabList] = useState<ICnab[]>([])
 
     useEffect(() => {
         const fn = async () => {
@@ -38,7 +39,7 @@ const CnabProvider = ({children}: ICnabProviderProps) => {
 
 
     return (
-        <cnabContext.Provider value={{cnabList}}>
+        <cnabContext.Provider value={{cnabList, setCnabList}}>
             {children}
         </cnabContext.Provider>
     )

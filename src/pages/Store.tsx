@@ -16,7 +16,7 @@ const Store = () => {
             setStore(data)
         }
         fn()
-    })
+    }, [])
 
     return (
         <div>
